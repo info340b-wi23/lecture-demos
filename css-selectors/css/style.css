@@ -1,0 +1,29 @@
+h1 {
+  font-family: 'Helvetica';
+  color: white;
+  background-color: rebeccapurple;
+  padding: .5em;
+}
+
+h2 {
+  color: rebeccapurple;
+}
+
+.ugly-font {
+  font-family: 'Papyrus';
+}
+
+p {
+  color: #333;
+}
+
+img {
+  max-height: 150px;
+  border-radius: 20px;
+}
+
+
+/* elements with class="about" */
+.about {
+  background-color: #eee;
+}
