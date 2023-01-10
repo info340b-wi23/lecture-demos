@@ -32,12 +32,23 @@
 
 
 
+
 /* Q2 */
 /* .first.second { color: green}; */
 /* div > p { color: green; } */
 /* div .second, #first { color: green; } */
-/* p:first-child {color: black; }
-p:last-child { color: green; }  */
+/* p:last-child { color: green; }  */
+
+/* .first {
+  background-color: aqua;
+} */
+
+
+
+
+
+
+
 
 
 
@@ -48,11 +59,17 @@ p:last-child { color: green; }  */
 
 
 /* Q3 */
-/* 
+
 p { color: grey; }
 #red { color: red; }
 .blue { color: blue; }
-#red .blue { color: magenta; }
+/* #red .blue { color: magenta; } */
 .green p { color: lightgreen; }
-div.green p.blue { color: cyan; }
-*/
+.green p.blue { color: cyan; }
+
+
+
+.forum-post {
+  font-family: wingdings;
+  font-size: 18px;
+}
