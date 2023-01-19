@@ -1,0 +1,21 @@
+body {
+  font-family: 'Papyrus', cursive;
+}
+
+h1 {
+  background-color: rebeccapurple;
+  /* padding-left: 1em;
+  padding-top: 2em; */
+}
+
+nav li {
+  display: inline;
+}
+
+.courses img {
+  max-width: 150px;
+}
+
+.courses .card {
+  /* flex: 1 0 300px; */
+}

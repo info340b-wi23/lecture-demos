@@ -8,12 +8,54 @@
   <meta name="author" content="Joel Ross">
   <title>Demo: Joel's Home Page (Bootstrap)</title>
 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
   <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
+
+  <!-- example adapted from Bootstrap.com -->
+  <nav class="navbar navbar-expand-md bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
   <nav>
-    <ul>
+    <ul class="d-flex">
       <li><a href="https://ischool.uw.edu">iSchool</a></li>
       <li><a href="#">Teaching</a></li>
       <li><a href="#">Research</a></li>
@@ -23,15 +65,17 @@
   </nav>
 
   <header>
-    <h1>Joel Ross</h1>
-    <p>University of Washington iSchool</p>
-    <p>
-      <a href="http://getbootstrap.com/">Built with Bootstrap</a>
-    </p>
+    <h1 class="text-light py-3">Joel Ross</h1>
+    <div class="container">
+      <p>University of Washington iSchool</p>
+      <p class="d-sm-none d-lg-block">
+        <a class="btn btn-primary" href="http://getbootstrap.com/">Built with Bootstrap</a>
+      </p>
+    </div>
 
   </header>
 
-  <main>
+  <main class="container">
 
     <section>
       <h2>About Me</h2>
@@ -42,33 +86,36 @@
       </p>  
     </section>
 
-    <section>
+    <section class="courses">
       <h2>Courses I Teach</h2>
       <p>
-        <button>Hide All</button>
+        <button class="btn btn-outline-secondary"
+          data-bs-toggle="collapse"
+          data-bs-target="#courseCardRow"
+        >Hide All</button>
       </p>
-      <div>
-        <div>
+      <div id="courseCardRow" class="row collapse">
+        <div class="card col-12 col-md-4 col-lg-3">
           <img src="img/chrome-logo-150w.png" alt="chrome browser logo">
           <h3>INFO 340: Client Side Development</h3>
         </div>
 
-        <div>
+        <div class="card col-12 col-md-4 col-lg-3">
           <img src="img/rlogo-150w.png" alt="r language logo">
           <h3>INFO 201: Foundational Skills for Data Science </h3>
         </div>
 
-        <div>
+        <div class="card col-12 col-md-4 col-lg-3">
           <img src="img/rockefeller-avatar-150w.png" alt="lego model of rockefeller center">
           <h3>INFO 443: Software Architecture</h3>
         </div>
 
-        <div>
+        <div class="card col-5 col-lg-3">
           <img src="img/android-icon-150w.png" alt="android droid icon">
           <h3>INFO 448: Android Development</h3>
         </div>
 
-        <div>
+        <div class="card col-5">
           <img src="img/python-logo-150w.png" alt="python language logo">
           <h3>LIS 511: Introduction to Programming</h3>
         </div>
@@ -102,6 +149,9 @@
   <footer>
     <p>&copy; Joel Ross & INFO 340 Wi 23</p>
   </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 </body>
 </html>
