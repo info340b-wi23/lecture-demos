@@ -8,3 +8,21 @@ const peopleArray = [
   {name: 'Emma', height: 71, weight: 152}
 ]
 console.log(peopleArray);
+
+
+function addExclamation(string) {
+  return string+"!!!";
+}
+
+const stringArray = ['Ada', 'Bob', 'Chris'];
+
+const transformedArray = stringArray.map(addExclamation);
+console.log(transformedArray);
+
+const nameArray = peopleArray.map(function(personObj) {
+  return personObj.name;
+})
+console.log(nameArray);
+
+
+
