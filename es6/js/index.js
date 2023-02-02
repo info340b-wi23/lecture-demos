@@ -1,5 +1,7 @@
 'use strict';
 
+console.log("DEMO BRANCH");
+
 const peopleArray = [
   {name: 'Ada', height: 64, weight: 135},
   {name: 'Bob', height: 74, weight: 156, pronoun: 'they/them'},
