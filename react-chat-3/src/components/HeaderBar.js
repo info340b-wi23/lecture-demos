@@ -1,13 +1,17 @@
 import React from 'react';
 
+import Dropdown from 'react-bootstrap/Dropdown';
+
 const DEFAULT_USERS = [
-  {userId: null, userName: null, userImg: '/img/null.png'}, //null user
+  {userId: null, userName: "Log Out", userImg: '/img/null.png'}, //null user
   {userId: "penguin", userName: "Penguin", userImg: '/img/Penguin.png'},
   {userId: "parrot", userName: "Parrot", userImg: '/img/Parrot.png'},
   {userId: "zebra", userName: "Zebra", userImg: '/img/Zebra.png'},  
 ]
 
 export function HeaderBar(props) {
+  const currentUser = props.currentUser;
+  const loginUser = props.loginUserFunction;
 
   //event handler
   const handleClick = (event) => {
@@ -16,16 +20,30 @@ export function HeaderBar(props) {
 
     console.log(selectedUserObj);
     //do something with userObj!
+    loginUser(selectedUserObj);
   }
 
   //for convenience
   const userButtons = DEFAULT_USERS.map((userObj) => {
+    if(userObj.userId === currentUser.userId) {
+      return null;
+    }
+
+    let classList = "btn user-icon";
+    // if(userObj.userId == currentUser.userId){ //if logged in
+    //   classList += " bg-success";
+    // }
     return (
-      <button className="btn user-icon" key={userObj.userName} 
-        name={userObj.userId} onClick={handleClick}
-      >
-        <img src={userObj.userImg} alt={userObj.userName + " avatar"} />
-      </button>
+      <Dropdown.Item className={classList} key={userObj.userName} 
+      name={userObj.userId} onClick={handleClick} >
+        <img src={userObj.userImg} alt={userObj.userName + " avatar"} /> {userObj.userName}
+      </Dropdown.Item>
+
+
+      // <button className={classList} key={userObj.userName} 
+      //   name={userObj.userId} onClick={handleClick}
+      // >
+      // </button>
     )
   })
 
@@ -33,7 +51,16 @@ export function HeaderBar(props) {
     <header className="text-light bg-primary px-1 d-flex justify-content-between">
       <h1>React Chat</h1>
       <div>
-        {userButtons}
+      <Dropdown>
+        <Dropdown.Toggle variant="primary">
+          <img src={currentUser.userImg} alt={currentUser.userName + " avatar"} />
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {userButtons}
+        </Dropdown.Menu>      
+      </Dropdown>
+
+
       </div>
     </header>
   )

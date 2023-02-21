@@ -1,25 +1,14 @@
 import React, {useState} from 'react';
 import { ComposeForm } from './ComposeForm';
 
-import INITIAL_HISTORY from '../data/chat_log.json'
-
 export function ChatPane(props) {
   const currentChannel = props.currentChannel;
+  const messageObjArray = props.messageArray;
+  const howToAddAMessage = props.howToAddAMessage;
+  const currentUser = props.currentUser;
   // console.log("calling ChatPane");
-  const [messageObjArray, setMessageObjArray] = useState(INITIAL_HISTORY);
 
-  const addMessage = (userObj, text, channel) => {
-    const newMessageObj = {
-      "userId": userObj.userId,
-      "userName": userObj.userName,
-      "userImg": userObj.userImg,
-      "text": text,
-      "timestamp": Date.now(),
-      "channel": channel
-    }
-    const newMessageArray = [...messageObjArray, newMessageObj];
-    setMessageObjArray(newMessageArray); //update state & rerender
-  }
+
 
   //what we look like
   const messagesToShow = messageObjArray
@@ -38,7 +27,6 @@ export function ChatPane(props) {
         return messageElem; //put it in the new array!
     });
 
-
   return (
     <> {/* fake div */}
       <div className="scrollable-pane pt-2 my-2">
@@ -50,7 +38,9 @@ export function ChatPane(props) {
           {messageElemArray}
         </div>
 
-        <ComposeForm currentChannel={currentChannel} howToAddAMessage={addMessage} />
+        <ComposeForm 
+          currentUser={currentUser}
+          currentChannel={currentChannel} howToAddAMessage={howToAddAMessage} />
     </>
   )
 }

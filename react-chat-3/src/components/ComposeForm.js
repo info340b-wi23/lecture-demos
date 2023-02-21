@@ -4,15 +4,17 @@ export function ComposeForm(props) {
   const currentChannel = props.currentChannel;
   const [typedValue, setTypedValue] = useState('');
   const howToAddAMessage = props.howToAddAMessage; //type function
-
+  const userObj = props.currentUser;
+  
   const handleClick = (event) => {
     console.log("posting text", typedValue);
     setTypedValue(''); //clear the input
     //add to the message list
 
-    const userObj = { userId: "parrot", userName: "Parrot", userImg: "/img/Penguin.png" }
     howToAddAMessage(userObj, typedValue, currentChannel);
   }
+
+  // element.addEventListern('click', function(event) {})
 
   const handleChange = (event) => {
     const whatUserTyped = event.target.value;
@@ -22,6 +24,7 @@ export function ComposeForm(props) {
   return (
     <form className="my-2">
       <div className="input-group">
+        <img src={userObj.userImg} alt={userObj.userName + " avatar"} />
         <textarea 
           onChange={handleChange}
           value={typedValue}

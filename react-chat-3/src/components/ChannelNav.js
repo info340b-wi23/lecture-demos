@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function ChannelList(props) {
-  const {currentChannel, howToChangeTheChannel} = props;
+  const {currentChannel, howToChangeTheChannel, channelMessageCounts} = props;
 
   //data! (an array of strings)
   const CHANNEL_NAMES_ARRAY = ['general', 'random', 'dank-memes', 'birds', 'channel-5'];
@@ -15,12 +15,13 @@ export function ChannelList(props) {
 
   //content!! (an array of `<li>`)
   const liArray = CHANNEL_NAMES_ARRAY.map((channelNameString) => {
+    const count = channelMessageCounts[channelNameString] || 0;
     const liElem = (
       <li key={channelNameString}>
         <a 
           name={channelNameString}
           onClick={handleClick}
-          href={"/"+channelNameString}>{channelNameString}</a>
+          href={"/"+channelNameString}>{channelNameString} ({count})</a>
       </li>
     )
     return liElem; //put it in the new array
