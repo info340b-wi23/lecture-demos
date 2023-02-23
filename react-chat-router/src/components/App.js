@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
+import { Routes, Route, Outlet } from 'react-router-dom';
+
 import { HeaderBar } from './HeaderBar.js';
-import { ChannelList } from './ChannelNav.js';
-import { ChatPane } from './ChatPane.js';
 
 import ChatPage from './ChatPage';
 import SignInPage from './SignInPage';
@@ -36,20 +36,39 @@ function App(props) {
     <div className="container-fluid d-flex flex-column">
       <HeaderBar currentUser={currentUser} />
 
-      <ChatPage 
-        currentUser={currentUser} 
-        messageArray={messageObjArray}
-        howToAddAMessage={addMessage}
-        />
-      {/* <SignInPage currentUser={currentUser} loginUserFunction={loginUser} /> */}
-      {/* <Static.WelcomePage /> */}
-      {/* <Static.AboutPage /> */}
-      {/* <Static.ErrorPage /> */}
+      <Routes>
+
+        <Route index element={ <Static.WelcomePage /> }/>
+        <Route path="about" element={ <Static.AboutPage /> } />
+        <Route path="signin" element={ <SignInPage currentUser={currentUser} loginUserFunction={loginUser} />} />
+
+        <Route path="" element={<RequireAuth currentUser={currentUser} />} >
+          <Route path="chat/:channelName?" element={
+            <ChatPage 
+              currentUser={currentUser} 
+              messageArray={messageObjArray}
+              howToAddAMessage={addMessage}
+              />
+          } />
+        </Route>
+        
+        <Route path="*" element={<Static.ErrorPage />} />
+
+      </Routes>
 
     </div>
   );
 }
 
+function RequireAuth(props) {
+  //...determine if user is logged in
+  if(props.currentUser.userId === null) { //not undefined
+    return <p>Forbidden!</p>
+  }
+  else { //otherwise, show the child route content
+    return <Outlet />
+  }
+}
 
 
 export default App;

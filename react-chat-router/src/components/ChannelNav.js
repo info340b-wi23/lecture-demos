@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
+
 export function ChannelList(props) {
   const {messageObjArray} = props; //extract from props
 
@@ -22,9 +25,9 @@ export function ChannelList(props) {
     const count = channelMessageCounts[channelNameString] || 0;
     const linkElem = (
       <div key={channelNameString}>
-        <a 
+        <Link
           name={channelNameString}
-          href={"/"+channelNameString}>{channelNameString} ({count})</a>
+          to={"/chat/"+channelNameString}>{channelNameString} ({count})</Link>
       </div>
     )
     return linkElem; //put it in the new array
