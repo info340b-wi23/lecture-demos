@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 
 import { Routes, Route, Outlet, Navigate, useNavigate } from 'react-router-dom';
 
+import { getDatabase, ref, set as firebaseSet, push as firebasePush, onValue } from 'firebase/database'
+
 import { HeaderBar } from './HeaderBar.js';
 
 import ChatPage from './ChatPage';
@@ -22,13 +24,33 @@ function App(props) {
     //log in a default user
     loginUser(DEFAULT_USERS[1])
 
+    //hook up a listener to Firebase
+    const db = getDatabase();
+    const allMessagesRef = ref(db, "allMessages");
+
+    //messageRef.addEventListener("value", function());
+    onValue(allMessagesRef, function(snapshot) {
+      const allMessagesObj = snapshot.val();
+      console.log(allMessagesObj);
+      const objKeys = Object.keys(allMessagesObj);
+      const objArray = objKeys.map((keyString) => {
+        allMessagesObj[keyString].key = keyString;
+        return allMessagesObj[keyString];
+        
+      })
+      console.log(objArray);
+      setMessageObjArray(objArray); //update state & rerender
+    });
+
+
+
   }, []) //array is list of variables that will cause this to rerun if changed
 
   const loginUser = (userObj) => {
     console.log("logging in as", userObj.userName);
     setCurrentUser(userObj);
     if(userObj.userId !== null){
-      navigateTo('/chat/general'); //go to chat after login
+      //navigateTo('/chat/general'); //go to chat after login
     }
   }
 
@@ -41,8 +63,17 @@ function App(props) {
       "timestamp": Date.now(),
       "channel": channel
     }
-    const newMessageArray = [...messageObjArray, newMessageObj];
-    setMessageObjArray(newMessageArray); //update state & rerender
+
+    // const newMessageArray = [...messageObjArray, newMessageObj];
+    // setMessageObjArray(newMessageArray); //update state & rerender
+
+    const db = getDatabase();
+    const allMMessagesRef = ref(db, "allMessages");
+    //firebaseSet(messageRef, newMessageObj);
+    firebasePush(allMMessagesRef, newMessageObj);
+
+
+
   }
 
   return (

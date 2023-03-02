@@ -3,6 +3,8 @@ import { ComposeForm } from './ComposeForm';
 
 import { useParams } from 'react-router-dom';
 
+import { getDatabase, ref, set as firebaseSet } from 'firebase/database'
+
 export function ChatPane(props) {
   const paramsObj = useParams();
   const currentChannel = paramsObj.channelName || "general" //default
@@ -13,6 +15,19 @@ export function ChatPane(props) {
 
   const handleTestClick = (event) => {
     console.log("testing...");
+
+    //add to database
+    const db = getDatabase();
+    const messageRef = ref(db, "message") //refers to the message key in the database
+    firebaseSet(messageRef, "You clicked me!");
+
+    const profFirstNameRef = ref(db, "professor/firstName")
+    firebaseSet(profFirstNameRef, "Mud");
+
+    const profCourseRef = ref(db, "professor/courseNumber");
+    firebaseSet(profCourseRef, "INFO 340");
+
+
   }
 
 
