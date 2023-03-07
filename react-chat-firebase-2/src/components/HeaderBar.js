@@ -2,6 +2,9 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 
+import { getAuth, signOut } from 'firebase/auth';
+
+
 const DEFAULT_USERS = [
   { userId: null, userName: "Log Out", userImg: '/img/null.png' }, //null user
   { userId: "penguin", userName: "Penguin", userImg: '/img/Penguin.png' },
@@ -14,6 +17,7 @@ export function HeaderBar(props) {
 
   const handleSignOut = (event) => {
     console.log("signing out");
+    signOut(getAuth());
   }
 
   return (
@@ -32,7 +36,7 @@ export function HeaderBar(props) {
           <li className="nav-item">
             <NavLink className="nav-link" to="/about">About</NavLink>
           </li>
-          {currentUser.userId && 
+          {currentUser && currentUser.userId && 
           <>
             <li className="nav-item">
               <NavLink to="/profile" className="nav-link">Profile</NavLink>
@@ -42,10 +46,11 @@ export function HeaderBar(props) {
             </li>
           </>
         }
-        {!currentUser.userId &&
+        {!currentUser || !currentUser.userId &&
           <li className="nav-item">
             <NavLink className="nav-link" to="/signin">
-              <img src={currentUser.userImg} alt={currentUser.userName + " avatar"} />
+              {/* <img src={currentUser.userImg} alt={currentUser.userName + " avatar"} /> */}
+              Sign In
             </NavLink>
           </li>
         }
